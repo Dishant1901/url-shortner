@@ -13,7 +13,11 @@ export const  genrerateNewShortUrl=async(req,res)=>{
         totalClicks:[], 
     });
 
-    return res.json({id: ShortID});
+    // return res.json({id: ShortID});
+    // To render views
+    return res.render("home",{
+        id:ShortID,
+    })
 
 }
 

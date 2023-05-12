@@ -1,49 +1,35 @@
 import express from "express";
 import router from "./Routes/urlRoute.js"
 import connectDB from "./connection.js";
+import path from 'path';
 import URL from "./models/url.js";
+import staticRoute from './Routes/staticRouter.js'
 
 const app=express();
 const PORT=8000;
 
 connectDB();
+app.set("view engine","ejs");
+app.set('views',path.resolve('./views'));
 
 app.use(express.json());
+app.use(express.urlencoded({extended:false}));
 app.use("/url",router);
+app.use('/',staticRoute);
 
-app.get('/test',(req, res) => {
-    return res.send("<h1> example of server side rendering</h1>");
-})
-
-
-// app.get('/:shortId',async(req,res)=>{
-//     // 1.fetching from db 
-//     // increatmenting click an dreturning clicl cout 
-//     const shortId = req.params.shortId;
-//     // joh ye new entry ki h us url p
-//     // usme joh shortId ki redirect url h DB m uski value p redirect kr rhe 
-//    const entry= await URL.findOneAndUpdate({
-//         shortId
-//     },
-//     {
-//         $push:
-//         {
-//             totalClicks:
-//             {
-//                 timestamp: Date.now(),
-//             },
-//         }
-
-//     });
-
-//     res.redirect(entry.redirectURL);
-//     // totalClicks++;
-// })
-
-
-app.get("/",(req,res)=>{
-    res.send("hello world");
+app.get('/test',async (req, res) => {
+    const allUrls = await URL.find({});
+    return res.render('home',{
+        urls: allUrls,
+    });
 });
+
+
+
+
+// app.get("/",(req,res)=>{
+//     res.send("hello world");
+// });
 
 
 
