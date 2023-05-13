@@ -1,19 +1,21 @@
+// importing packages 
 import express from "express";
-import router from "./Routes/urlRoute.js"
 import cookieParser from "cookie-parser";
 import path from 'path';
 import connectDB from "./connection.js";
 //
 import URL from "./models/url.js";
+import router from "./Routes/urlRoute.js"
 import staticRoute from './Routes/staticRouter.js';
 import userRoute from "./Routes/userRoute.js";
 import { checkAuth, restrictToLoogedinUser } from "./middleware/auth.js";
-// import restrictToLoogedinUser from "./middleware/auth.js"
+
 
 const app=express();
 const PORT=8000;
 
 connectDB();
+//setting up view engine
 app.set("view engine","ejs");
 app.set('views',path.resolve('./views'));
 

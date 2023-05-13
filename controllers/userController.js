@@ -26,12 +26,11 @@ export const handleUserLogin =async(req,res)=>{
             });
         }
 
-        // setting uuid value to sessio uuid
-        const sessionId = v4();
+       
         // calling function to map logged in user to sessionId
-        setUser(sessionId, user);
+        const token =setUser( user);
         // setting cookie in browser with name 'uuid'& it's value being set to sessionId
-        res.cookie('uuid',sessionId);
+        res.cookie('uuid',token);
   
     return res.redirect("/");
 }
