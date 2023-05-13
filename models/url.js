@@ -10,6 +10,10 @@ const urlSchema =new mongoose.Schema({
         required:true,
     },
     totalClicks:[{timestamp:{type:Number}}],
+    createdBy:{
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'users',
+    }
 }
 ,{timestamps:true} );
 

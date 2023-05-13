@@ -11,6 +11,8 @@ export const  genrerateNewShortUrl=async(req,res)=>{
         shortId: ShortID,
         redirectURL:body.url,
         totalClicks:[], 
+        // ye id hamne middleware m set ki h 
+        createdBy:req.user._id,
     });
 
     // return res.json({id: ShortID});
